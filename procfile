@@ -1,1 +1,1 @@
-web: node src/nserver.js
+web: node src/server.js
