@@ -19,12 +19,12 @@ var client = new Twitter({
   
 app.use(express.static('css'));
 app.use(express.static('js'));
-app.use('/', express.static(__dirname));
+app.use('/', express.static(__dirname+'/src/'));
 
 const accessToken = 'EAAEUQvxOrEMBAP9PGeNcddvk2UODlUZCYMX9nzZBElmZAfAZCil0nlPlerGsZBirwiBtMCW0ARbkVzSpgvEdpH4EZB2zBIqK1MzGDc6APPgXSBURDzHkiEBKwAvi4bIlQZAsrVTX8uaAcJgnRZA1p46lu4EPjgtILo8EUBkdO3OYAC4Xjrg43iYo';
 
   var request = require('request');
-  fs.readFile(__dirname+'/src/index.html',function (err, data){
+  fs.readFile(__dirname+'index.html',function (err, data){
     console.log("This is us"+err);
     console.log("This is us"+data);
     });
