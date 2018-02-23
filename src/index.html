@@ -1899,7 +1899,7 @@ var ChPostId;
             console.log("Updating the value of total post counts");
             $('#TwCount').css('color','red');
             if(CurrentScreen ==="TW"){
-              var insertRow = "<tr><td class='col-md-2' scope='row'><b>"+msg.created_at+"<b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-twitter-square fa-2x' style='color:#0084b4;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>"+msg.id_str+"</span></td> <td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Network Coverage</a></li></ul></td><td class='col-md-2'>Tweeted At</td><td class='col-md-1'><b><a onclick='ShowRequest(\"TW\",\""+msg.user.screen_name+"_"+msg.id_str+"\")'>Take Action!</a></td></tr>";
+              var insertRow = "<tr class='TwData'><td class='col-md-2' scope='row'><b>"+msg.created_at+"<b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-twitter-square fa-2x' style='color:#0084b4;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>"+msg.id_str+"</span></td> <td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Network Coverage</a></li></ul></td><td class='col-md-2'>Tweeted At</td><td class='col-md-1'><b><a onclick='ShowRequest(\"TW\",\""+msg.user.screen_name+"_"+msg.id_str+"\")'>Take Action!</a></td></tr>";
               $("#NewData").append(insertRow);
             }
           }, 1000);
