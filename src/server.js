@@ -44,7 +44,7 @@ var acceptedFbPost= Array();
 var FbAcceptedCount=0;
 
         setTimeout(function checkPost(){
-            request({'url':'https://graph.facebook.com/v2.9/304938040010257/visitor_posts?access_token=' + accessToken
+            request({'url':'https://graph.facebook.com/v2.9/371419483325923/visitor_posts?access_token=' + accessToken
            }, function (error, response, body) {
                if (!error && response.statusCode == 200) {
                    //console.log(response.body);
