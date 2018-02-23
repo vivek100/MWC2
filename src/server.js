@@ -19,16 +19,32 @@ var client = new Twitter({
   
 app.use(express.static('css'));
 app.use(express.static('js'));
-app.use('/', express.static(__dirname+'/src'));
+app.use('/', express.static(__dirname));
 
 const accessToken = 'EAAEUQvxOrEMBAP9PGeNcddvk2UODlUZCYMX9nzZBElmZAfAZCil0nlPlerGsZBirwiBtMCW0ARbkVzSpgvEdpH4EZB2zBIqK1MzGDc6APPgXSBURDzHkiEBKwAvi4bIlQZAsrVTX8uaAcJgnRZA1p46lu4EPjgtILo8EUBkdO3OYAC4Xjrg43iYo';
 
   var request = require('request');
-  fs.readFile(__dirname+'/index.html',function (err, data){
+  fs.readFile(__dirname+'index.html',function (err, data){
     console.log("This is us"+err);
     console.log("This is us"+data);
     });
 
+
+app.get('/', function (req, res) {
+    fs.readFile('index.html',function (err, data){
+        console.log(err);
+        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+        res.write(data);
+        res.end();
+    });
+})
+app.get('/faq.html', function (req, res) {
+    fs.readFile('faq.html',function (err, data){
+        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+        res.write(data);
+        res.end();
+    });
+})
 
 var PostCounter = [2,2,1,3,1,1];
 
