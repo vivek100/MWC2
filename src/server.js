@@ -23,7 +23,7 @@ app.use(express.static('js'));
 app.use('/', express.static(__dirname));
 
 const accessToken = 'EAAEUQvxOrEMBABLSCcNuzgZAqAwMqRhNpPl8j3aHVjao9aczEymxgWpSZAOcZA7lrpC3OsQTO9FdEcCaDihgOZCILabYKeojanTUE5H8yyRcEztcvyyM20axX4v1vI9frjoKXZANmnAL0BZAjPOfZC306gWOB1M5aozZBJqTdnwCn4W7S7O3RDYx';
-
+var abs;
   var request = require('request');
   fs.readFile(__dirname+'index.html',function (err, data){
     console.log("This is us"+err);
