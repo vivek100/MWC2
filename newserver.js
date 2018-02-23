@@ -280,6 +280,5 @@ io.on('connection', function(socket){
            });
 });
 
-http.listen(8080, function(){
-    console.log('listening on *:8080');
-  });
+var port_number = server.listen(process.env.PORT || 3000);
+app.listen(port_number);
