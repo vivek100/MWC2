@@ -30,21 +30,6 @@ const accessToken = 'EAAEUQvxOrEMBAP9PGeNcddvk2UODlUZCYMX9nzZBElmZAfAZCil0nlPler
     });
 
 
-app.get('/', function (req, res) {
-    fs.readFile('index.html',function (err, data){
-        console.log(err);
-        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
-        res.write(data);
-        res.end();
-    });
-})
-app.get('/faq.html', function (req, res) {
-    fs.readFile('faq.html',function (err, data){
-        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
-        res.write(data);
-        res.end();
-    });
-})
 
 var PostCounter = [2,2,1,3,1,1];
 
