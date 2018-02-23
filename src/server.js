@@ -3,7 +3,8 @@ var app = require('express')();
 var fs = require('fs');
 var rp = require('request-promise');
 var http    = require('http').Server(app);
-var io = require('socket.io').listen(server),
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 var Twitter = require('twitter');
 
 var client = new Twitter({
@@ -270,6 +271,4 @@ io.sockets.on('connection', function(socket){
 });
 
 const REST_PORT = (process.env.PORT || 5000);
-app.listen(REST_PORT, () => {
-    console.log('Rest service ready on port ' + REST_PORT);
-});
+server.listen(process.env.PORT || 3000);
