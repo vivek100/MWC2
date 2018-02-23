@@ -19,7 +19,7 @@ var client = new Twitter({
   
 app.use(express.static('css'));
 app.use(express.static('js'));
-app.use('/', express.static(__dirname+'/src'));
+app.use('/', express.static(__dirname+'/src/'));
 
 const accessToken = 'EAAEUQvxOrEMBAP9PGeNcddvk2UODlUZCYMX9nzZBElmZAfAZCil0nlPlerGsZBirwiBtMCW0ARbkVzSpgvEdpH4EZB2zBIqK1MzGDc6APPgXSBURDzHkiEBKwAvi4bIlQZAsrVTX8uaAcJgnRZA1p46lu4EPjgtILo8EUBkdO3OYAC4Xjrg43iYo';
 
