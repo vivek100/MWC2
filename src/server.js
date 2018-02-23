@@ -19,7 +19,7 @@ var client = new Twitter({
   
 app.use(express.static('css'));
 app.use(express.static('js'));
-app.use('/', express.static(__dirname+'/src/'));
+app.use('/', express.static(__dirname+'/src'));
 
 const accessToken = 'EAAEUQvxOrEMBAP9PGeNcddvk2UODlUZCYMX9nzZBElmZAfAZCil0nlPlerGsZBirwiBtMCW0ARbkVzSpgvEdpH4EZB2zBIqK1MzGDc6APPgXSBURDzHkiEBKwAvi4bIlQZAsrVTX8uaAcJgnRZA1p46lu4EPjgtILo8EUBkdO3OYAC4Xjrg43iYo';
 
@@ -31,7 +31,12 @@ const accessToken = 'EAAEUQvxOrEMBAP9PGeNcddvk2UODlUZCYMX9nzZBElmZAfAZCil0nlPler
 
 
 app.get('/', function (req, res) {
-    res.send("welcome");
+    fs.readFile(__dirname+'/index.html',function (err, data){
+        console.log(err);
+        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+        res.write(data);
+        res.end();
+    });
 })
 app.get('/faq.html', function (req, res) {
     fs.readFile(__dirname+'/faq.html',function (err, data){
@@ -280,6 +285,6 @@ io.on('connection', function(socket){
 });
 
 const REST_PORT = (process.env.PORT || 5000);
-http.listen(REST_PORT, function(){
+app.listen(REST_PORT, function(){
     console.log('listening on *:8080');
   });
