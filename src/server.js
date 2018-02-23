@@ -3,7 +3,7 @@ var app = require('express')();
 var fs = require('fs');
 var rp = require('request-promise');
 var http    = require('http').Server(app);
-var io      = require('socket.io')(http);
+var io = require('socket.io').listen(server),
 var Twitter = require('twitter');
 
 var client = new Twitter({
@@ -125,7 +125,7 @@ var numUsers = 0;
 var acceptedChPost= Array();
 var ChAcceptedCount=0;
 
-io.on('connection', function(socket){
+io.sockets.on('connection', function(socket){
         console.log('a user connected');
         socket.on('Get Initial Count',function(){
             console.log("Count requested");
