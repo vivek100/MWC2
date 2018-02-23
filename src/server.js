@@ -31,12 +31,7 @@ const accessToken = 'EAAEUQvxOrEMBAP9PGeNcddvk2UODlUZCYMX9nzZBElmZAfAZCil0nlPler
 
 
 app.get('/', function (req, res) {
-    fs.readFile(__dirname+'/index.html',function (err, data){
-        console.log(err);
-        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
-        res.write(data);
-        res.end();
-    });
+    res.send("welcome");
 })
 app.get('/faq.html', function (req, res) {
     fs.readFile(__dirname+'/faq.html',function (err, data){
