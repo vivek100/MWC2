@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Dashboard Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css'>
+<link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.2.0/metisMenu.min.css'>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/v4-shims.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+            body {
+              font-family: 'Roboto', sans-serif;
+              background-color: #f5f5f5;
+              color: #444;
+              
+            }
+iframe, object, embed {
+    max-width: 100%;
+}
+.circle-icon {
+    background: lightblue;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    padding: 30px;
+}
+  body {
+  background-color: #f8f8f8;
+  }
+
+          /* Fix user-agent */
+
+          * {
+        box-sizing: border-box;
+      }
+
+      input {
+        font-family:
+          "HelveticaNeue-Light",
+          "Helvetica Neue Light",
+          "Helvetica Neue",
+          Helvetica,
+          Arial,
+          "Lucida Grande",
+          sans-serif;
+      }
+
+      ul {
+        list-style: none;
+        word-wrap: break-word;
+      }
+
+      /* Pages */
+
+      .pages {
+        height: 500px;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+
+      .page {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+      }
+
+      /* Chat page */
+
+      .chat.page {
+        display: none;
+      }
+
+      /* Font */
+
+      .messages {
+        font-size: 150%;
+      }
+
+      .inputMessage {
+        font-size: 100%;
+      }
+
+      .log {
+        color: gray;
+        font-size: 70%;
+        margin: 5px;
+        text-align: center;
+      }
+
+      /* Messages */
+
+      .chatArea {
+        height: 100%;
+        padding-bottom: 60px;
+      }
+
+      .messages {
+        height: 100%;
+        margin: 0;
+        overflow-y: scroll;
+        padding: 10px 20px 10px 20px;
+      }
+
+      .message.typing .messageBody {
+        color: gray;
+      }
+
+      .username {
+        font-weight: 700;
+        overflow: hidden;
+        padding-right: 15px;
+        text-align: right;
+      }
+
+      /* Input */
+
+      .inputMessage {
+        border: 10px solid #000;
+        bottom: 0;
+        height: 60px;
+        left: 0;
+        outline: none;
+        padding-left: 10px;
+        position: absolute;
+        right: 0;
+        width: 100%;
+      }
+
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 35px;
+        height: 700px;
+        overflow: hidden;
+    }
+    .video-container iframe {
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+  .tags {
+      list-style: none;
+      margin: 0;
+      overflow: hidden; 
+      padding: 0;
+    }
+
+    .tags li {
+      float: left; 
+    }
+
+    .tag {
+      background: lightblue;
+      font-style: comic-sans;
+      border-radius: 3px 0 0 3px;
+      color: black;
+      display: inline-block;
+      height: 26px;
+      line-height: 26px;
+      padding: 0 20px 0 23px;
+      position: relative;
+      margin: 0 10px 10px 0;
+      text-decoration: none;
+      -webkit-transition: color 0.2s;
+    }
+
+    .tag::before {
+      background: black;
+      border-radius: 10px;
+      box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+      content: '';
+      height: 6px;
+      left: 10px;
+      position: absolute;
+      width: 6px;
+      top: 10px;
+    }
+
+    .tag::after {
+      background: #fff;
+      border-bottom: 13px solid transparent;
+      border-left: 10px solid lightblue;
+      border-top: 13px solid transparent;
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .tag:hover {
+      background-color: crimson;
+      color: white;
+    }
+
+    .tag:hover::after {
+      border-left-color: crimson; 
+    }
+a:hover {
+ cursor:pointer;
+}
+
+#wrapper {
+  width: 100%;
+}
+
+#page-wrapper {
+  padding: 0 15px;
+  min-height: 568px;
+  background-color: white;
+}
+
+@media (min-width: 768px) {
+  #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 0px;
+    padding: 0 30px;
+    border-left: 1px solid #e7e7e7;
+  }
+}
+
+.navbar-top-links {
+  margin-right: 0;
+}
+
+.navbar-top-links li {
+  display: inline-block;
+}
+
+.navbar-top-links li:last-child {
+  margin-right: 15px;
+}
+
+.navbar-top-links li a {
+  padding: 15px;
+  min-height: 50px;
+}
+
+.navbar-top-links .dropdown-menu li {
+  display: block;
+}
+
+.navbar-top-links .dropdown-menu li:last-child {
+  margin-right: 0;
+}
+
+.navbar-top-links .dropdown-menu li a {
+  padding: 3px 20px;
+  min-height: 0;
+}
+
+.navbar-top-links .dropdown-menu li a div {
+  white-space: normal;
+}
+
+.navbar-top-links .dropdown-messages,
+.navbar-top-links .dropdown-tasks,
+.navbar-top-links .dropdown-alerts {
+  width: 310px;
+  min-width: 0;
+}
+
+.navbar-top-links .dropdown-messages {
+  margin-left: 5px;
+}
+
+.navbar-top-links .dropdown-tasks {
+  margin-left: -59px;
+}
+
+.navbar-top-links .dropdown-alerts {
+  margin-left: -123px;
+}
+
+.navbar-top-links .dropdown-user {
+  right: 0;
+  left: auto;
+}
+
+.sidebar .sidebar-nav.navbar-collapse {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar .sidebar-search {
+  padding: 15px;
+}
+
+.sidebar ul li {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.sidebar ul li a.active {
+  background-color: #eeeeee;
+}
+
+.sidebar .arrow {
+  float: right;
+}
+
+.sidebar .fa.arrow:before {
+  content: "\f104";
+}
+
+.sidebar .active > a > .fa.arrow:before {
+  content: "\f107";
+}
+
+.sidebar .nav-second-level li,
+.sidebar .nav-third-level li {
+  border-bottom: none !important;
+}
+
+.sidebar .nav-second-level li a {
+  padding-left: 37px;
+}
+
+.sidebar .nav-third-level li a {
+  padding-left: 52px;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    z-index: 1;
+    position: absolute;
+    width: 250px;
+    margin-top: 51px;
+  }
+  .navbar-top-links .dropdown-messages,
+  .navbar-top-links .dropdown-tasks,
+  .navbar-top-links .dropdown-alerts {
+    margin-left: auto;
+  }
+}
+
+.btn-outline {
+  color: inherit;
+  background-color: transparent;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+  color: #428bca;
+}
+
+.btn-success.btn-outline {
+  color: #5cb85c;
+}
+
+.btn-info.btn-outline {
+  color: #5bc0de;
+}
+
+.btn-warning.btn-outline {
+  color: #f0ad4e;
+}
+
+.btn-danger.btn-outline {
+  color: #d9534f;
+}
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+  color: white;
+}
+
+.chat {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chat li {
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px dotted #999999;
+}
+
+.chat li.left .chat-body {
+  margin-left: 60px;
+}
+
+.chat li.right .chat-body {
+  margin-right: 60px;
+}
+
+.chat li .chat-body p {
+  margin: 0;
+}
+
+.panel .slidedown .glyphicon,
+.chat .glyphicon {
+  margin-right: 5px;
+}
+
+.chat-panel .panel-body {
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.login-panel {
+  margin-top: 25%;
+}
+
+.flot-chart {
+  display: block;
+  height: 400px;
+}
+
+.flot-chart-content {
+  width: 100%;
+  height: 100%;
+}
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+  background: transparent;
+}
+
+table.dataTable thead .sorting_asc:after {
+  content: "\f0de";
+  float: right;
+  font-family: fontawesome;
+}
+
+table.dataTable thead .sorting_desc:after {
+  content: "\f0dd";
+  float: right;
+  font-family: fontawesome;
+}
+
+table.dataTable thead .sorting:after {
+  content: "\f0dc";
+  float: right;
+  font-family: fontawesome;
+  color: rgba(50, 50, 50, 0.5);
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.428571429;
+}
+
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-size: 18px;
+  line-height: 1.33;
+}
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.show-grid [class^="col-"] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #ddd;
+  background-color: #eee !important;
+}
+
+.show-grid {
+  margin: 15px 0;
+}
+
+.huge {
+  font-size: 40px;
+}
+
+.panel-green {
+  border-color: #5cb85c;
+}
+
+.panel-green .panel-heading {
+  border-color: #5cb85c;
+  color: white;
+  background-color: #5cb85c;
+}
+
+.panel-green a {
+  color: #5cb85c;
+}
+
+.panel-green a:hover {
+  color: #3d8b3d;
+}
+
+.panel-red {
+  border-color: #d9534f;
+}
+
+.panel-red .panel-heading {
+  border-color: #d9534f;
+  color: white;
+  background-color: #d9534f;
+}
+
+.panel-red a {
+  color: #d9534f;
+}
+
+.panel-red a:hover {
+  color: #b52b27;
+}
+
+.panel-yellow {
+  border-color: #f0ad4e;
+}
+
+.panel-yellow .panel-heading {
+  border-color: #f0ad4e;
+  color: white;
+  background-color: #f0ad4e;
+}
+
+.panel-yellow a {
+  color: #f0ad4e;
+}
+
+.panel-yellow a:hover {
+  color: #df8a13;
+}
+
+.timeline {
+  position: relative;
+  padding: 20px 0 20px;
+  list-style: none;
+}
+
+.timeline:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  margin-left: -1.5px;
+  background-color: #eeeeee;
+}
+
+.timeline > li {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.timeline > li:before,
+.timeline > li:after {
+  content: " ";
+  display: table;
+}
+
+.timeline > li:after {
+  clear: both;
+}
+
+.timeline > li:before,
+.timeline > li:after {
+  content: " ";
+  display: table;
+}
+
+.timeline > li:after {
+  clear: both;
+}
+
+.timeline > li > .timeline-panel {
+  float: left;
+  position: relative;
+  width: 46%;
+  padding: 20px;
+  border: 1px solid #d4d4d4;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
+
+.timeline > li > .timeline-panel:before {
+  content: " ";
+  display: inline-block;
+  position: absolute;
+  top: 26px;
+  right: -15px;
+  border-top: 15px solid transparent;
+  border-right: 0 solid #ccc;
+  border-bottom: 15px solid transparent;
+  border-left: 15px solid #ccc;
+}
+
+.timeline > li > .timeline-panel:after {
+  content: " ";
+  display: inline-block;
+  position: absolute;
+  top: 27px;
+  right: -14px;
+  border-top: 14px solid transparent;
+  border-right: 0 solid #fff;
+  border-bottom: 14px solid transparent;
+  border-left: 14px solid #fff;
+}
+
+.timeline > li > .timeline-badge {
+  z-index: 100;
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  margin-left: -25px;
+  border-radius: 50% 50% 50% 50%;
+  text-align: center;
+  font-size: 1.4em;
+  line-height: 50px;
+  color: #fff;
+  background-color: #999999;
+}
+
+.timeline > li.timeline-inverted > .timeline-panel {
+  float: right;
+}
+
+.timeline > li.timeline-inverted > .timeline-panel:before {
+  right: auto;
+  left: -15px;
+  border-right-width: 15px;
+  border-left-width: 0;
+}
+
+.timeline > li.timeline-inverted > .timeline-panel:after {
+  right: auto;
+  left: -14px;
+  border-right-width: 14px;
+  border-left-width: 0;
+}
+
+.timeline-badge.primary {
+  background-color: #2e6da4 !important;
+}
+
+.timeline-badge.success {
+  background-color: #3f903f !important;
+}
+
+.timeline-badge.warning {
+  background-color: #f0ad4e !important;
+}
+
+.timeline-badge.danger {
+  background-color: #d9534f !important;
+}
+
+.timeline-badge.info {
+  background-color: #5bc0de !important;
+}
+
+.timeline-title {
+  margin-top: 0;
+  color: inherit;
+}
+
+.timeline-body > p,
+.timeline-body > ul {
+  margin-bottom: 0;
+}
+
+.timeline-body > p + p {
+  margin-top: 5px;
+}
+
+@media(max-width:767px) {
+  ul.timeline:before {
+    left: 40px;
+  }
+  ul.timeline > li > .timeline-panel {
+    width: calc(100% - 90px);
+    width: -webkit-calc(100% - 90px);
+  }
+  ul.timeline > li > .timeline-badge {
+    top: 16px;
+    left: 15px;
+    margin-left: 0;
+  }
+  ul.timeline > li > .timeline-panel {
+    float: right;
+  }
+  ul.timeline > li > .timeline-panel:before {
+    right: auto;
+    left: -15px;
+    border-right-width: 15px;
+    border-left-width: 0;
+  }
+  ul.timeline > li > .timeline-panel:after {
+    right: auto;
+    left: -14px;
+    border-right-width: 14px;
+    border-left-width: 0;
+  }
+}
+</style>
+  
+</head>
+
+<body>
+  <div id="wrapper">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" onclick="ShowDB()"><i class="fas fa-home" style="color:#337ab7"></i><span style="padding-left:5px"></span>All in one CQM(Demo)</a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-messages">
+          <li>
+            <a href="#">
+              <div>
+                <strong>John Smith</strong>
+                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+              </div>
+              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">
+              <div>
+                <strong>John Smith</strong>
+                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+              </div>
+              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">
+              <div>
+                <strong>John Smith</strong>
+                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+              </div>
+              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a class="text-center" href="#">
+              <strong>Read All Messages</strong>
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </li>
+        </ul>
+        <!-- /.dropdown-messages -->
+      </li>
+      <!-- /.dropdown -->
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-tasks">
+          <li>
+            <a href="#">
+              <div>
+                <p>
+                  <strong>Task 1</strong>
+                  <span class="pull-right text-muted">40% Complete</span>
+                </p>
+                <div class="progress progress-striped active">
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                    <span class="sr-only">40% Complete (success)</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">
+              <div>
+                <p>
+                  <strong>Task 2</strong>
+                  <span class="pull-right text-muted">20% Complete</span>
+                </p>
+                <div class="progress progress-striped active">
+                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                    <span class="sr-only">20% Complete</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">
+              <div>
+                <p>
+                  <strong>Task 3</strong>
+                  <span class="pull-right text-muted">60% Complete</span>
+                </p>
+                <div class="progress progress-striped active">
+                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                    <span class="sr-only">60% Complete (warning)</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">
+              <div>
+                <p>
+                  <strong>Task 4</strong>
+                  <span class="pull-right text-muted">80% Complete</span>
+                </p>
+                <div class="progress progress-striped active">
+                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                    <span class="sr-only">80% Complete (danger)</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a class="text-center" href="#">
+              <strong>See All Tasks</strong>
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </li>
+        </ul>
+        <!-- /.dropdown-tasks -->
+      </li>
+      <!-- /.dropdown -->
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-alerts">
+          <li>
+            <a href="#">
+              <div>
+                <i class="fa fa-comment fa-fw"></i> New Comment
+                <span class="pull-right text-muted small">4 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">
+              <div>
+                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                <span class="pull-right text-muted small">12 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">
+              <div>
+                <i class="fa fa-envelope fa-fw"></i> Message Sent
+                <span class="pull-right text-muted small">4 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">
+              <div>
+                <i class="fa fa-tasks fa-fw"></i> New Task
+                <span class="pull-right text-muted small">4 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#">
+              <div>
+                <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                <span class="pull-right text-muted small">4 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a class="text-center" href="#">
+              <strong>See All Alerts</strong>
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </li>
+        </ul>
+        <!-- /.dropdown-alerts -->
+      </li>
+      <!-- /.dropdown -->
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+          <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+          </li>
+          <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+          </li>
+          <li class="divider"></li>
+          <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+          </li>
+        </ul>
+        <!-- /.dropdown-user -->
+      </li>
+      <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    
+    <!-- /.navbar-static-side -->
+  </nav>
+
+  <div id="page-wrapper" style="min-height: 11px;">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header" id="TopTitle">Main Dashboard</h1>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-lg-2 col-md-6">
+        <div class="panel panel" style="background-color:#dfe3ee">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fab fa-facebook-square fa-5x" style="color:#3b5998"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge" id="FbCount" >0</div>
+                <div style="padding-top:10px;font-size:1.25em">New Posts.</div>
+              </div>
+            </div>
+          </div>
+          <a onclick="ShowChannel('FB')">
+            <div class="panel-footer">
+              <span class="pull-left">View Details</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6">
+        <div class="panel panel" style="background-color:#dfe3ee">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fab fa-twitter-square fa-5x" style="color:#0084b4"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge" id="TwCount">0</div>
+                <div style="padding-top:10px;font-size:1.25em">New Tweets.</div>
+              </div>
+            </div>
+          </div>
+          <a onclick="ShowChannel('TW')">
+            <div class="panel-footer">
+              <span class="pull-left">View Details</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6">
+        <div class="panel panel" style="background-color:#dfe3ee">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fas fa-comments fa-5x" style="color:black"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge" id="ChCount">0</div>
+                <div style="padding-top:10px;font-size:1.25em">New Chats.</div>
+              </div>
+            </div>
+          </div>
+          <a onclick="ShowChannel('CH')">
+            <div class="panel-footer">
+              <span class="pull-left">View Details</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fas fa-envelope fa-5x" style="color:#dd4b39"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge" id="MlCount">0</div>
+                <div style="padding-top:10px;font-size:1.25em">New Mails.</div>
+              </div>
+            </div>
+          </div>
+          <a onclick="ShowChannel('ML')">
+            <div class="panel-footer">
+              <span class="pull-left">View Details</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6">
+          <div class="panel panel" style="background-color:#dfe3ee">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-3">
+                  <i class="fas fa-phone fa-5x" style="color:#5b90e5;"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                  <div class="huge" id="ClCount">0</div>
+                  <div style="padding-top:10px;font-size:1.25em">New Calls.</div>
+                </div>
+              </div>
+            </div>
+            <a onclick="ShowChannel('CL')">
+              <div class="panel-footer">
+                <span class="pull-left">View Details</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="panel panel" style="background-color:#ffeabc">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-3">
+                    <i class="fas fa-users fa-4x" style="color:#fdb515"></i>
+                  </div>
+                  <div class="col-xs-9 text-right">
+                    <div class="huge" id="WiCount">0</div>
+                    <div style="padding-top:10px;font-size:1.25em">New Walk-ins.</div>
+                  </div>
+                </div>
+              </div>
+              <a onclick="ShowChannel('WI')">
+                <div class="panel-footer">
+                  <span class="pull-left">View Details</span>
+                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                  <div class="clearfix"></div>
+                </div>
+              </a>
+            </div>
+          </div>
+    </div>
+    <div class="panel panel-default" id="MainDashboard">
+      <div class="panel-heading">
+        <i class="fa fa-bar-chart-o fa-fw"></i> <span style="font-weight:bold"> Accepted Issue Queue</span>
+        <div class="pull-right">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+              Actions
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+              <li><a href="#">Active</a>
+              </li>
+              <li><a href="#">Closed</a>
+              </li>
+              <li><a href="#">Sort</a>
+              </li>
+              <li class="divider"></li>
+              <li><a href="#">All Issues</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div>
+              <table class="table table-responsive table-bordered table-hover table-striped ">
+                <thead>
+                  <tr>
+                    <th scope="col"><b>Issue#</th>
+                    <th scope="col"><b>Channel</th>
+                    <th scope="col"><b>Short Description</th>
+                    <th scope="col"><b>Assigned to</th>
+                    <th scope="col"><b>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3326</a></td>
+                    <td class="col-md-1"><i class="fa fa-facebook-square fa-lg" style="color:#3b5998"></i></td>
+                    <td class="col-md-4">Tmobile Tuesday Promo code not working.</td>
+                    <td class="col-md-2"><b>Vivek</td>
+                    <td class="col-md-2 info"><b>Assigned</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3325</a></td>
+                    <td class="col-md-1"><i class="fa fa-facebook-square fa-lg" style="color:#3b5998"></i></td>
+                    <td class="col-md-4">Bad netwrok reception.</td>
+                    <td class="col-md-2"><b>Gitika</td>
+                    <td class="col-md-2 info"><b>Assigned</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3324</a></td>
+                    <td class="col-md-1"><i class="fa fa-twitter-square fa-lg" style="color:#0084b4"></i></td>
+                    <td class="col-md-4">Delay in device shippment.</td>
+                    <td class="col-md-2"><b>Gitika</td>
+                    <td class="col-md-2 success"><b>Closed</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3323</a></td>
+                    <td class="col-md-1"><i class="fa fa-comments-o fa-lg" style="color:black"></i></td>
+                    <td class="col-md-4">Account suspended incorrectly.</td>
+                    <td class="col-md-2"><b>Shubham</td>
+                    <td class="col-md-2 danger"><b>Not Assgined</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3322</a></td>
+                    <td class="col-md-1"><i class="fa fa-envelope fa-lg" style="color:#dd4b39"></i></td>
+                    <td class="col-md-4">Increased call drops.</td>
+                    <td class="col-md-2"><b>Rohit</td>
+                    <td class="col-md-2 info"><b>Assigned</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3321</a></td>
+                    <td class="col-md-1"><i class="fa fa-envelope fa-lg" style="color:#dd4b39"></i></td>
+                    <td class="col-md-4">Customer wants to change the existing plan.</td>
+                    <td class="col-md-2"><b>Shubham</td>
+                    <td class="col-md-2 info"><b>Assigned</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3320</a></td>
+                    <td class="col-md-1"><i class="fa fa-twitter-square fa-lg" style="color:#0084b4"></i></i></td>
+                    <td class="col-md-4">Offer inquiry.</td>
+                    <td class="col-md-2"><b>Vivek</td>
+                    <td class="col-md-2 danger"><b>Not Assgined</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3319</a></td>
+                    <td class="col-md-1"><i class="fa fa-facebook-square fa-lg" style="color:#3b5998"></i></td>
+                    <td class="col-md-4">Portin Request.</td>
+                    <td class="col-md-2"><b>Rohit</td>
+                    <td class="col-md-2 success"><b>Closed</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3318</a></td>
+                    <td class="col-md-1"><i class="fa fa-envelope fa-lg" style="color:#dd4b39"></i></td>
+                    <td class="col-md-4">Port Out Request.</td>
+                    <td class="col-md-2"><b>Vivek</td>
+                    <td class="col-md-2 success"><b>Closed</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1" scope="row"><b><a>3317</a></td>
+                    <td class="col-md-1"><i class="fa fa-comments-o fa-lg" style="color:black"></i></td>
+                    <td class="col-md-4">Customer wants to cancel services.</td>
+                    <td class="col-md-2"><b>Gitika</td>
+                    <td class="col-md-2 success"><b>Closed</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.table-responsive -->
+          </div>
+          <!-- /.col-lg-12 (nested) -->
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+              <div class="modal-content">
+                
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">New Facebook Event</h4>
+                </div>
+                <div class="modal-body">
+                  
+                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D342686272902100%26id%3D304938040010257&width=500" width="500" height="174" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+              
+              </div>
+        </div>
+      </div>
+      <div class="modal fade" id="TwModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+                <div class="modal-content">
+                  
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">New Twitter Event</h4>
+                  </div>
+                  <div class="modal-body">
+
+                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/Myorangethought?ref_src=twsrc%5Etfw">@Myorangethought</a> I want to port to your network and I&#39;m using Samsung galaxy S4. Please let me know if it&#39;s compatible</p>&mdash; Shubham Khare (@shubhamkhare71) <a href="https://twitter.com/shubhamkhare71/status/963741011259240448?ref_src=twsrc%5Etfw">February 14, 2018</a></blockquote>
+                      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>                      
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>
+                
+                </div>
+          </div>
+      </div>
+      <div class="modal fade" id="ChModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+                <div class="modal-content">
+                  
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">New Chat Event</h4>
+                  </div>
+                  <div class="modal-body">
+                    
+                      Chat came in Thu Feb 22 2018.
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>
+                
+                </div>
+          </div>
+      </div>
+      <div class="modal fade" id="MlModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+                <div class="modal-content">
+                  
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">New Mail Event</h4>
+                  </div>
+                  <div class="modal-body">
+                    
+                      <h5>Peter Gregor  to  CutomerCare.<h6>14:10</h6></h5>
+                      <h3>Bad Network Coverage</h3>
+                      <p>Hi,<br>
+                      
+                      <br>I wish to complain about new Number that I purchased on 18 Feb.
+                      
+                      <br>I am complaining because of high call drops. Can you guys please look into this.
+                      
+                      
+                      <br><br>Have a nice day.<br>Peter</p>                   
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>
+                
+                </div>
+          </div>
+      </div>
+      <div class="modal fade" id="ClModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+                <div class="modal-content">
+                  
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">New Call Event</h4>
+                  </div>
+                  <div class="modal-body">
+
+                      <h2>Call came in at Mon Feb 19 2018</h2>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>
+                
+                </div>
+          </div>
+      </div>
+      <div class="modal fade" id="WiModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+                <div class="modal-content">
+                  
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">New Walk-in Event</h4>
+                  </div>
+                  <div class="modal-body">
+                   
+                      <h2>New Customer Complaint at BullBerry store.</h2>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>
+                
+                </div>
+          </div>
+      </div>
+
+      
+    <div class="panel panel-default" id="ChannelDashboard" style="font-weight: bold">
+        <div class="panel-heading">
+          <i class="fa fa-flag fa-lg" style="color:crimson"></i> New Events
+          <div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                Actions
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li><a href="#">Active</a>
+                </li>
+                <li><a href="#">Closed</a>
+                </li>
+                <li><a href="#">Sort</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="#">All Issues</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- /.panel-heading -->
+        
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div>
+                <table class="table table-responsive table-bordered table-hover table-striped ">
+                  <thead>
+                    <tr>
+                      <th scope="col"><b>Created At</b></th>
+                      <th scope="col"><b>Link</b></th>
+                      <th scope="col"><b>Tags</b></th>
+                      <th scope="col"><b>Type</b></th>
+                      <th scope="col"><b>Action</b></th>
+                    </tr>
+                  </thead>
+                  <tbody id="NewData">
+                    
+  
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.col-lg-12 (nested) -->
+          </div>
+        </div>
+        <!-- /.row -->
+      </div>
+  
+    <!-- /.panel-body -->
+    <div class="panel panel-default" id="CreateTicket" style="font-weight: bold">
+        
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div>
+                  <a onclick="ShowRequest('WI','57')"><i class="fas fa-pencil-alt fa-7x circle-icon" style="color:#5b90e5;"></i></a>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.col-lg-12 (nested) -->
+          </div>
+        </div>
+        <!-- /.row -->
+      </div>
+  
+    <!-- /.panel-body -->
+    <div class="panel panel-default" id="TakeAction" >
+        <div class="panel-heading" style="background-color:#dfe3ee;color:black;font-weight:bold">
+          <i class="fa fa-flag fa-lg" style="color:crimson"></i> Event ID:-<span id="TicketID"></span>
+          <div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                Actions
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li><a href="#">Active</a>
+                </li>
+                <li><a href="#">Closed</a>
+                </li>
+                <li><a href="#">Sort</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="#">All Issues</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- /.panel-heading -->
+        
+        <div class="panel-body">
+          <div class="row" >
+           
+            <div class="col-lg-12">
+              <div class="col-lg-12" id="ChatPost">
+                  <ul class="pages">
+                      <li class="chat page">
+                        <div class="chatArea">
+                          <ul class="messages"></ul>
+                        </div>
+                        <input class="inputMessage" placeholder="Type here..."/>
+                      </li>
+                      <li class="login page">
+                        <div class="form">
+                            <h3 class="title" style="color:orange;padding-bottom:2em">Welcome to my Chat Channel.</h3>
+                          <h3 class="title">What's your nickname?</h3>
+                          <input class="usernameInput" type="text" maxlength="14" />
+                        </div>
+                      </li>
+                    </ul>
+              </div>
+              <div class="col-lg-12" id="MailPost">
+                  <div class="panel panel-default" style="border-color:#d5e2ed">
+                      <div class="panel-heading" style="background-color:white;border-color:#d5e2ed">
+                        <i class="fa fa-info-circle fa-lg" style="color:black;padding:3px"></i> <b>Detailed Mail Info.</b>
+                      </div>
+                      <!-- /.panel-heading -->
+                      
+                      <div class="panel-body">
+                        <div class="row">
+                            <div style="padding:1em;color:black">
+                                <h5>Peter Gregor  to  CutomerCare.<h6>14:10</h6></h5>
+                                <h3>Bad Network Coverage</h3>
+                                <p>Hi,<br>
+                                
+                                <br>I wish to complain about new Number that I purchased on 18 Feb.
+                                
+                                <br>I am complaining because of high call drops. Can you guys please look into this.
+                                
+                                
+                                <br><br>Have a nice day.<br>Peter</p>
+                            </div>
+                
+                          </div>
+                          <!-- /.col-lg-12 (nested) -->
+                        </div>
+                      </div>
+                      <!-- /.row -->
+                    </div>
+                
+                  </div>
+                  <div class="col-lg-12" id="CallPost">
+                      <div class="panel panel-default" style="border-color:#d5e2ed">
+                          <div class="panel-heading" style="background-color:white;border-color:#d5e2ed">
+                            <i class="fa fa-info-circle fa-lg" style="color:black;padding:3px"></i> <b>Recieve the Call.</b>
+                          </div>
+                          <!-- /.panel-heading -->
+                          
+                          <div class="panel-body">
+                            <div class="row">
+                                <div style="padding:1em;color:black">
+                                    <a><i class="fas fa-phone fa-7x circle-icon" style="color:#5b90e5;"></i></a>
+                                </div>
+                    
+                              </div>
+                              <!-- /.col-lg-12 (nested) -->
+                            </div>
+                          </div>
+                          <!-- /.row -->
+                    </div>
+                
+              <div class="col-lg-6" id="ShowEmbeddPostData" >
+                  
+                       <div style="padding-top:2em" id="NormalPost1">
+                          <table class="table table-responsive table-bordered table-hover table-striped ">
+                              <tr>
+                                  <th scope="col" style="background-color:white;border-color:#d5e2ed;color:black;font-weight:bold"><b><i class="fa fa-tags" aria-hidden="true"></i> Edit or Add more Tags</b></th>
+                                </tr>
+                              </thead>
+                              <tbody >
+                                <tr style="background-color:white">
+                                  <td>
+                                  <ul class="tags" style="padding-top:1em">
+                                      <li><a href="#" class="tag">Portin</a></li>
+                                      <li><a href="#" class="tag">Device Compatibilty</a></li>
+                                      <li><a href="#" class="tag">Samsung Galaxy</a></li>
+                                    </ul>
+                                  </td>
+                                </tr>
+                              </tbody>
+                          </table>
+                      </div>
+  
+              </div>
+              <div class="col-lg-6" id="NormalPost2">
+                  <div class="panel panel-default" style="border-color:#d5e2ed">
+                      <div class="panel-heading" style="background-color:white;border-color:#d5e2ed">
+                        <i class="fa fa-info-circle fa-lg" style="color:black;padding:3px"></i> <b>Detailed Info.</b>
+                      </div>
+                      <!-- /.panel-heading -->
+                      
+                      <div class="panel-body">
+                        <div class="row">
+                            <div id="DetailedInfo" style="padding:1em;color:black">
+                            </div>
+                
+                          </div>
+                          <!-- /.col-lg-12 (nested) -->
+                        </div>
+                      </div>
+                      <!-- /.row -->
+                    </div>
+                
+                  </div>
+                  <!-- /.panel -->
+              </div>
+              <div class="row" style="padding:2em">
+                  <div class="panel panel-default" >
+                      <div class="panel-heading" style="background-color:#dfe3ee;border-color:#dfe3ee">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i> <b>Take Action</b>
+                      </div>
+                      <!-- /.panel-heading -->
+                      
+                      <div class="panel-body">
+                        <div class="row">
+                              <div class="col-lg-6">
+                                <div style="padding:1em;color:black">
+  
+                                  <div class="form-group">
+                                    <label for="comment" id="CommentLable">Comment:</label>
+                                    <textarea class="form-control" rows="4" id="comment"></textarea>
+                                    <label for="ex1" style="padding-top:1em">Customer ID</label>
+                                    <input class="form-control" id="ex1" type="text" placeholder="If available" />
+                                    
+                                    <button type="button" class="btn btn-primary" style="margin-top:1em" onclick="postComment()">Comment and Accept</button><br>
+                                    <button type="button" class="btn btn-success" style="margin-top:1em">Comment and Close</button><br>
+                                    <button type="button" class="btn btn-warning" style="margin-top:1em">Comment</button>
+                                  </div>
+                                
+                                </div>
+  
+                              </div>
+                              <div class="col-lg-6">
+                                  <div style="color:black" class="video-container">
+                                      <iframe src="/faq.html" height="700" width="900" allowfullscreen="" frameborder="0"></iframe>
+                                    
+                                  
+                                  </div>
+                            </div>
+                          <!-- /.col-lg-12 (nested) -->
+                        </div>
+                      </div>
+                      <!-- /.row -->
+                    </div>
+                
+                  </div>
+                  <!-- /.panel -->   
+              </div>
+  
+            </div>
+          
+            <!-- /.col-lg-12 (nested) -->
+          </div>
+          
+        </div>
+        <!-- /.row -->
+  
+      </div>
+  
+    </div>
+    <!-- /.panel specific request-->
+    <div class="panel panel-default" id="TicketTimeline">
+        <div class="panel-heading">
+          <i class="fa fa-clock-o fa-fw"></i> Ticket Timeline
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <ul class="timeline">
+            <li>
+              <div class="timeline-badge success"><i class="fa fa-check"></i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4 class="timeline-title">Complaint Registered</h4>
+                  <p><small class="text-muted"><i class="fa fa-clock-o"></i> minutes ago via Facebook</small>
+                  </p>
+                </div>
+                <div class="timeline-body">
+                  <p id="DetailedInfo1"></p>
+                </div>
+              </div>
+            </li>
+            <li class="timeline-inverted">
+              <div class="timeline-badge" id="timelineBadge"><i class="fa fa-clock-o"></i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4 class="timeline-title" id="timelineTitle">The ticket is yet to be updated.</h4>
+                  <p id="timelineBody"></p>
+                </div>
+                <div class="timeline-body">
+                </div>
+              </div>
+            </li>
+            
+          </ul>
+        </div>
+        <!-- /.panel-body -->
+      </div>
+      <!-- /.panel system timeline--> 
+  </div>
+  <!-- /.panel -->
+  <!-- /.panel -->
+</div>
+</div>
+<!-- /.panel .chat-panel -->
+</div>
+<!-- /.col-lg-4 -->
+</div>
+<!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.2.0/metisMenu.min.js'></script>
+<script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
+<script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+
+
+    <script>
+    $(function() {
+
+  $('#side-menu').metisMenu();
+
+});
+
+//Loads the correct sidebar on window load,
+//collapses the sidebar on window resize.
+// Sets the min-height of #page-wrapper to window size
+$(function() {
+  $(window).bind("load resize", function() {
+    topOffset = 50;
+    width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
+    if (width < 768) {
+      $('div.navbar-collapse').addClass('collapse');
+      topOffset = 100; // 2-row-menu
+    } else {
+      $('div.navbar-collapse').removeClass('collapse');
+    }
+
+    height = ((this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height) - 1;
+    height = height - topOffset;
+    if (height < 1) height = 1;
+    if (height > topOffset) {
+      $("#page-wrapper").css("min-height", (height) + "px");
+    }
+  });
+
+  var url = window.location;
+  var element = $('ul.nav a').filter(function() {
+    return this.href == url || url.href.indexOf(this.href) == 0;
+  }).addClass('active').parent().parent().addClass('in').parent();
+  if (element.is('li')) {
+    element.addClass('active');
+  }
+});
+var socket = io();
+$("#ChannelDashboard").hide();
+$("#CreateTicket").hide();
+$("#TakeAction").hide();
+$("#TicketTimeline").hide();
+var counter=0;
+var CurrentScreen;
+var FbPostId;
+var TwPostId;
+var ChPostId;
+  function ShowDB(){
+    $("#MainDashboard").show();
+    $("#TopTitle").text("Main Dashboard");
+    $("#ChannelDashboard").hide();
+    $("#CreateTicket").hide();
+    $("#TakeAction").hide();
+    $("#TicketTimeline").hide();
+  }
+  function ShowChannel(channel){
+    $("#MainDashboard").hide();
+    $("#TakeAction").hide();
+    $("#TicketTimeline").hide();   
+    if(channel === "FB"){
+      CurrentScreen="FB";
+      $("#TopTitle").text("Facebook Dashboard");
+        $(".FbData").remove();
+        $(".TwData").remove();
+        $(".ChData").remove();
+        $(".MlData").remove();
+        $(".ClData").remove();
+        $(".WiData").remove();
+        $(".FbPost").remove();
+        $("#CreateTicket").hide();
+        removeComment();
+        insertRow1="<tr class='FbData'><td class='col-md-2' scope='row'><b>2018-02-20T11:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-facebook-square fa-2x' style='color:#3b5998;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10155918870413895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Portin</a></li><li><a href='#' class='tag'>Device Compatibilty</a></li><li><a href='#' class='tag'>Samsung Galaxy</a></li></ul></td><td class='col-md-2'>Visitor Post</td><td class='col-md-1'><b><a onclick='ShowRequest()'>Take Action!</b></a></td></tr>"
+        insertRow2="<tr class='FbData'><td class='col-md-2' scope='row'><b>2018-02-19T09:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-facebook-square fa-2x' style='color:#3b5998;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10198418870443895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Roaming</a></li><li><a href='#' class='tag'>Add Ons</a></li></ul></td><td class='col-md-2'>Visitor Post</td><td class='col-md-1'><b><a onclick='ShowRequest()'>Take Action!</b></a></td></tr>"
+        
+        $("#NewData").append(insertRow1);
+        $("#NewData").append(insertRow2);
+        socket.emit('Get Latest FB Data');
+
+
+
+    }else if(channel === "TW"){
+      CurrentScreen="TW";
+      $("#TopTitle").text("Twiiter Dashboard");
+      $(".TwData").remove();
+      $(".FbData").remove();
+      $(".ChData").remove();
+      $(".MlData").remove();
+      $(".ClData").remove();
+      $(".WiData").remove();
+      $(".FbPost").remove();
+      $("#CreateTicket").hide();
+      removeComment();
+        insertRow1="<tr class='TwData'><td class='col-md-2' scope='row'><b>2018-02-20T11:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#TwModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-twitter-square fa-2x' style='color:#0084b4;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10155918870413895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Portin</a></li><li><a href='#' class='tag'>Device Compatibilty</a></li><li><a href='#' class='tag'>Samsung Galaxy</a></li></ul></td><td class='col-md-2'>Visitor Post</td><td class='col-md-1'><b><a onclick='ShowRequest()'>Take Action!</b></a></td></tr>"
+        insertRow2="<tr class='TwData'><td class='col-md-2' scope='row'><b>2018-02-19T09:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#TwModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-twitter-square fa-2x' style='color:#0084b4;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10155918870413895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Roaming</a></li><li><a href='#' class='tag'>Add Ons</a></li></ul></td><td class='col-md-2'>Visitor Post</td><td class='col-md-1'><b><a onclick='ShowRequest()'>Take Action!</b></a></td></tr>"
+        
+        $("#NewData").append(insertRow1);
+        $("#NewData").append(insertRow2);
+        socket.emit('Get Latest TW Data');
+
+    }else if(channel === "CH"){
+      CurrentScreen="CH";
+      $("#TopTitle").text("OnLine Chat Dashboard");
+      $(".TwData").remove();
+      $(".FbData").remove();
+      $(".ChData").remove();
+      $(".MlData").remove();
+      $(".ClData").remove();
+      $(".WiData").remove();
+      $(".FbPost").remove();
+      $("#CreateTicket").hide();
+      removeComment();
+        insertRow1="<tr class='ChData'><td class='col-md-2' scope='row'><b>2018-02-20T11:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#ChModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-comments-o fa-2x' style='color:black;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10155918870413895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Portin</a></li><li><a href='#' class='tag'>Device Compatibilty</a></li><li><a href='#' class='tag'>Samsung Galaxy</a></li></ul></td><td class='col-md-2'>Visitor Post</td><td class='col-md-1'><b><a onclick='ShowRequest()'>Take Action!</b></a></td></tr>"
+                
+        $("#NewData").append(insertRow1);
+        socket.emit('Get Latest CH Data');
+    }else if(channel === "ML"){
+      CurrentScreen="ML";
+      $("#TopTitle").text("Mails Dashboard");
+      $(".TwData").remove();
+      $(".FbData").remove();
+      $(".ChData").remove();
+      $(".MlData").remove();
+      $(".ClData").remove();
+      $(".WiData").remove();
+      $(".FbPost").remove();
+      $("#CreateTicket").hide();
+      removeComment();
+        insertRow1="<tr class='MlData'><td class='col-md-2' scope='row'><b>2018-02-20T11:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#MlModal' style='color:#3b5998;cursor: pointer;'><i class='fas fa-envelope fa-2x' style='color:#dd4b39;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10155918870413895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Network Coverage</a></li></ul></td><td class='col-md-2'>New Mail</td><td class='col-md-1'><b><a onclick='ShowRequest(\"ML\",\"123\")'>Take Action!</b></a></td></tr>"
+        insertRow2="<tr class='MlData'><td class='col-md-2' scope='row'><b>2018-02-19T09:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#MlModal' style='color:#3b5998;cursor: pointer;'><i class='fas fa-envelope fa-2x' style='color:#dd4b39;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10155918870413895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Roaming</a></li><li><a href='#' class='tag'>Add Ons</a></li></ul></td><td class='col-md-2'>Reply Mail</td><td class='col-md-1'><b><a onclick='ShowRequest(\"ML\",\"124\")'>Take Action!</b></a></td></tr>"
+        insertRow3="<tr class='MlData'><td class='col-md-2' scope='row'><b>2018-02-19T15:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#MlModal' style='color:#3b5998;cursor: pointer;'><i class='fas fa-envelope fa-2x' style='color:#dd4b39;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10155918870413895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Roaming</a></li><li><a href='#' class='tag'>Add Ons</a></li></ul></td><td class='col-md-2'>New Mail</td><td class='col-md-1'><b><a onclick='ShowRequest(\"ML\",\"125\")'>Take Action!</b></a></td></tr>"
+        
+        $("#NewData").append(insertRow1);
+        $("#NewData").append(insertRow2);
+        $("#NewData").append(insertRow3);
+    }else if(channel === "CL"){
+      CurrentScreen="CL";
+      $("#TopTitle").text("Calls Dashboard");
+      $(".TwData").remove();
+      $(".FbData").remove();
+      $(".ChData").remove();
+      $(".MlData").remove();
+      $(".ClData").remove();
+      $(".WiData").remove();
+      $(".FbPost").remove();
+      $("#CreateTicket").hide();
+      removeComment();
+        insertRow1="<tr class='ClData'><td class='col-md-2' scope='row'><b>2018-02-20T11:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#ClModal' style='color:#3b5998;cursor: pointer;'><i class='fas fa-phone fa-2x' style='color:#5b90e5;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10155918870413895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Portin</a></li><li><a href='#' class='tag'>Device Compatibilty</a></li><li><a href='#' class='tag'>Samsung Galaxy</a></li></ul></td><td class='col-md-2'>Visitor Post</td><td class='col-md-1'><b><a onclick='ShowRequest(\"CL\",\"122\")'>Take Action!</b></a></td></tr>"
+                
+        $("#NewData").append(insertRow1);
+    }else if(channel === "WI"){
+      CurrentScreen="WI";
+      $("#TopTitle").text("Walk-ins Dashboard");
+      $(".TwData").remove();
+      $(".FbData").remove();
+      $(".ChData").remove();
+      $(".MlData").remove();
+      $(".ClData").remove();
+      $(".WiData").remove();
+      $(".FbPost").remove();
+      removeComment();
+        insertRow1="<tr class='WiData'><td class='col-md-2' scope='row'><b>2018-02-20T11:53:00+0000</b></td><td class='col-md-3' data-toggle='modal' data-target='#WiModal' style='color:#3b5998;cursor: pointer;'><i class='fas fa-users fa-2x' style='color:#fdb515;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>10155918870413895</span></td><td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Portin</a></li><li><a href='#' class='tag'>Device Compatibilty</a></li><li><a href='#' class='tag'>Samsung Galaxy</a></li></ul></td><td class='col-md-2'>Visitor Post</td><td class='col-md-1'><b><a onclick='ShowRequest(\"WI\",\"56\")'>Take Action!</b></a></td></tr>"
+                
+        $("#NewData").append(insertRow1);
+        $("#CreateTicket").show();
+    }
+    $("#ChannelDashboard").show();
+    
+  }
+
+
+  socket.emit('Get Initial Count');
+  socket.on('Sent Initial Count', function(msg){
+    console.log(msg);
+      $("#FbCount").text(msg[0]);
+      $("#TwCount").text(msg[1]);
+      $("#ChCount").text(msg[2]);
+      $("#MlCount").text(msg[3]);
+      $("#ClCount").text(msg[4]);
+      $("#WiCount").text(msg[5]);
+
+  });
+
+  socket.on('chat message', function(msg){
+      console.log(msg.id+CurrentScreen+"new post alert");
+      
+      
+          setTimeout(function(){
+            $('#FbCount').css('color','red');
+            if(CurrentScreen ==="FB"){
+              console.log("Updating the value of total post counts");
+              
+              var insertRow = "<tr class='FbData'><td class='col-md-2' scope='row'><b>"+msg.created_time+"<b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-facebook-square fa-2x' style='color:#3b5998;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>"+msg.id+"</span></td> <td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Portin</a></li><li><a href='#' class='tag'>Device Compatibilty</a></li><li><a href='#' class='tag'>Samsung Galaxy</a></li></ul></td><td class='col-md-2'>Visitor Post</td><td class='col-md-1'><b><a onclick='ShowRequest(\"FB\",\""+msg.id+"\")'>Take Action!</a></td></tr>";
+              $("#NewData").append(insertRow);
+            }
+          }, 1000);
+      
+    });
+  socket.on('chat TW message', function(msg){
+      console.log(msg.id_str+CurrentScreen+"new TW alert");
+      
+      
+          setTimeout(function(){
+            console.log("Updating the value of total post counts");
+            $('#TwCount').css('color','red');
+            if(CurrentScreen ==="TW"){
+              var insertRow = "<tr><td class='col-md-2' scope='row'><b>"+msg.created_at+"<b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-twitter-square fa-2x' style='color:#0084b4;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>"+msg.id_str+"</span></td> <td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Network Coverage</a></li></ul></td><td class='col-md-2'>Tweeted At</td><td class='col-md-1'><b><a onclick='ShowRequest(\"TW\",\""+msg[index].user.screen_name+"_"+msg[index].id_str+"\")'>Take Action!</a></td></tr>";
+              $("#NewData").append(insertRow);
+            }
+          }, 1000);
+
+    });
+  socket.on('New chat message', function(msg){
+      console.log(msg.id+CurrentScreen+"new CH alert");
+      
+      
+          setTimeout(function(){
+            console.log("Updating the value of total post counts");
+            $('#ChCount').css('color','red');
+            if(CurrentScreen ==="CH"){
+              insertRow = "<tr class='ClData'><td class='col-md-2' scope='row'><b>"+msg.time+"<b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:black;cursor: pointer;'><i class='fa fa-comments-o fa-2x' style='color:black;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>"+msg.id+"</span></td> <td class='col-md-4'><ul class='tags'></ul></td><td class='col-md-2'>New Chat!</td><td class='col-md-1'><b><a onclick='ShowRequest(\"CH\",\""+msg.id+"\")'>Take Action!</a></td></tr>";
+              $("#NewData").append(insertRow);
+            }
+          }, 1000);
+
+    });
+
+    socket.on('Sent Latest FB Data', function(msg){
+          console.log(msg);
+          for (var index = 0; index < msg.length; index++) {
+            console.log(msg[index]);
+            if(CurrentScreen ==="FB"){
+              var insertRow = "<tr class='FbData'><td class='col-md-2' scope='row'><b>"+msg[index].created_time+"<b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-facebook-square fa-2x' style='color:#3b5998;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>"+msg[index].id+"</span></td> <td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Portin</a></li><li><a href='#' class='tag'>Device Compatibilty</a></li><li><a href='#' class='tag'>Samsung Galaxy</a></li></ul></td><td class='col-md-2'>Visitor Post</td><td class='col-md-1'><b><a onclick='ShowRequest(\"FB\",\""+msg[index].id+"\")'>Take Action!</a></td></tr>";
+              $("#NewData").append(insertRow);
+            }
+            
+          }
+      });
+    socket.on('Sent Latest TW Data', function(msg){
+          console.log(msg);
+          for (var index = 0; index < msg.length; index++) {
+            console.log(msg[index]);
+            if(CurrentScreen ==="TW"){
+              var insertRow = "<tr class='TwData'><td class='col-md-2' scope='row'><b>"+msg[index].created_at+"<b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:#3b5998;cursor: pointer;'><i class='fa fa-twitter-square fa-2x' style='color:#0084b4;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>"+msg[index].id_str+"</span></td> <td class='col-md-4'><ul class='tags'><li><a href='#' class='tag'>Network Coverage</a></li></ul></td><td class='col-md-2'>Tweeted At</td><td class='col-md-1'><b><a onclick='ShowRequest(\"TW\",\""+msg[index].user.screen_name+"_"+msg[index].id_str+"\")'>Take Action!</a></td></tr>";
+              $("#NewData").append(insertRow);
+            }
+          }
+    });
+    socket.on('Sent Latest CH Data', function(msg){
+          console.log(msg);
+          for (var index = 0; index < msg.length; index++) {
+            console.log(msg[index]);
+            if(CurrentScreen ==="CH"){
+              insertRow = "<tr class='ClData'><td class='col-md-2' scope='row'><b>"+msg[index].time+"<b></td><td class='col-md-3' data-toggle='modal' data-target='#myModal' style='color:black;cursor: pointer;'><i class='fa fa-comments-o fa-2x' style='color:black;padding-right:3px;padding-top:7px'></i><span style='padding-left:5px;font-size:1.25em'>"+msg[index].id+"</span></td> <td class='col-md-4'><ul class='tags'></ul></td><td class='col-md-2'>New Chat!</td><td class='col-md-1'><b><a onclick='ShowRequest(\"CH\",\""+msg[index].id+"\")'>Take Action!</a></td></tr>";
+                $("#NewData").append(insertRow);
+            }
+          }
+    });
+    function ShowRequest(type,data){
+      $("#TakeAction").show();
+      $("#TicketTimeline").show();
+      $("#ChannelDashboard").hide();
+      $("#CreateTicket").hide();
+
+      if(type==="FB"){
+          var PostIdString = data+"";
+          FbPostId= data+"";
+          var PostId = PostIdString.split("_");
+          console.log(data);
+          console.log(PostId[0]);
+          $('#TicketID').text(PostId[1]); 
+          var insertPost = "<div class='fb-post' data-href='https://www.facebook.com/permalink.php?story_fbid="+PostId[1]+"&amp;id="+PostId[0]+"' data-width='auto' data-show-text='true'><blockquote cite='https://www.facebook.com/permalink.php?story_fbid="+PostId[1]+"&amp;id="+PostId[0]+"' class='fb-xfbml-parse-ignore'><p>Facebook Post Data...</p>Posted by <a href='#' role='button'>Facebook User</a> on&nbsp;<a href='https://www.facebook.com/permalink.php?story_fbid="+PostId[1]+"&amp;id="+PostId[0]+"'>Post Date</a></blockquote></div>";
+          var insertPost1="<iframe class='FbPost' src=\'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D"+PostId[1]+"%26id%3D"+PostId[0]+"&width=auto' height='250' width='600' allowfullscreen='' frameborder='0' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowTransparency='true'></iframe>";
+          console.log(insertPost);
+          $("#ShowEmbeddPostData").prepend(insertPost1);
+
+          socket.emit('Get detailed info',data);
+          socket.on('Send Detailed Info', function(msg){
+            $('#DetailedInfo').text(msg); 
+            $('#DetailedInfo1').text(msg); 
+          });
+      }else if(type==="TW"){
+          var PostIdString = data+"";
+          TwPostId= data+"";
+          var PostId = PostIdString.split("_");
+          console.log(data);
+          console.log(PostId[0]);
+          $('#TicketID').text(PostId[1]); 
+          var insertPost2 ="<div class='TwPost'><blockquote class='twitter-tweet' data-lang='en'><p lang='en' dir='ltr'><a href='https://twitter.com/Myorangethought?ref_src=twsrc%5Etfw'>@myorangethought</a> tweet text</p> <a href='https://twitter.com/"+PostId[0]+"/status/"+PostId[1]+"?ref_src=twsrc%5Etfw'>Tweets date</a></blockquote><script async src='https://platform.twitter.com/widgets.js' charset='utf-8'><//script></div>"
+          console.log(insertPost2);
+          $("#ShowEmbeddPostData").prepend(insertPost2);
+
+          socket.emit('Get detailed TW info',PostId[1]);
+          
+          socket.on('Send Detailed TW Info', function(msg){
+              $('#DetailedInfo').text(msg); 
+              $('#DetailedInfo1').text(msg); 
+          });
+      }else if(type==="CH"){
+          var PostIdString = data+"";
+          ChPostId= data+"";
+          $('#TicketID').text(PostIdString); 
+          $('#NormalPost1').hide();
+          $('#NormalPost2').hide();
+          $('#ChatPost').show();
+          
+          console.log("Inside CH");
+          setUsername();
+          
+      }else if(type==="ML"){
+          
+          $('#TicketID').text(data);
+          $('#NormalPost1').hide();
+          $('#NormalPost2').hide();
+          $('#MailPost').show();
+      }else if(type==="CL"){
+          
+          $('#TicketID').text(data);
+          $('#NormalPost1').hide();
+          $('#NormalPost2').hide();
+          $('#CallPost').show();
+      }else if(type==="WI"){
+          
+          $('#TicketID').text(data); 
+          $('#NormalPost1').hide();
+          $('#NormalPost2').hide();
+      }
+      
+    }
+    function postComment(){
+      if(CurrentScreen ==="FB"){
+    
+          var commentText = $('#comment').val();
+          $('#timelineTitle').text('Vivek Replied and Accepted the request.');
+          $('#timelineBody').text("Vivek Replied '"+commentText+"' and Accepted the request.");
+          $('#timelineBadge').addClass('success');
+          var data = {'comment':commentText,'id':FbPostId}
+          console.log(commentText);
+          socket.emit('Post Comment',data);
+          console.log("remove comment");
+          $('#comment').val('');
+          $('#CommentLable').append("<p class='com' style='color:green'>Comment was successfully added!!</p>");
+
+      } else if(CurrentScreen ==="TW"){
+          var PostId = TwPostId.split("_");
+          var commentText = $('#comment').val();
+          $('#timelineTitle').text('Vivek Replied and Accepted the request.');
+          $('#timelineBody').text("Vivek Replied '"+commentText+"' and Accepted the request.");
+          $('#timelineBadge').addClass('success');
+          var data = {'comment':"@"+PostId[0]+" "+commentText,'id':PostId[1]}
+          console.log(commentText);
+          socket.emit('Post TW Comment',data);
+          console.log("remove comment");
+          $('#comment').val('');
+          $('#CommentLable').append("<p class='com' style='color:green'>Comment was successfully added!!</p>");
+
+      } else if(CurrentScreen ==="CH"){
+          var PostId = TwPostId.split("_");
+          var commentText = $('#comment').val();
+          $('#timelineTitle').text('Vivek Replied and Accepted the request.');
+          $('#timelineBody').text("Vivek Replied '"+commentText+"' and Accepted the request.");
+          $('#timelineBadge').addClass('success');
+          console.log(commentText);
+          console.log("remove comment");
+          $('#comment').val('');
+          $('#CommentLable').append("<p class='com' style='color:green'>Comment was successfully added!!</p>");
+
+      }else if(CurrentScreen ==="ML"){
+          var PostId = TwPostId.split("_");
+          var commentText = $('#comment').val();
+          $('#timelineTitle').text('Vivek Replied and Accepted the request.');
+          $('#timelineBody').text("Vivek Replied '"+commentText+"' and Accepted the request.");
+          $('#timelineBadge').addClass('success');
+          console.log(commentText);
+          console.log("remove comment");
+          $('#comment').val('');
+          $('#CommentLable').append("<p class='com' style='color:green'>Comment was successfully added!!</p>");
+
+      }else if(CurrentScreen ==="CL"){
+          var PostId = TwPostId.split("_");
+          var commentText = $('#comment').val();
+          $('#timelineTitle').text('Vivek Replied and Accepted the request.');
+          $('#timelineBody').text("Vivek Replied '"+commentText+"' and Accepted the request.");
+          $('#timelineBadge').addClass('success');
+          console.log(commentText);
+          console.log("remove comment");
+          $('#comment').val('');
+          $('#CommentLable').append("<p class='com' style='color:green'>Comment was successfully added!!</p>");
+
+      }else if(CurrentScreen ==="WI"){
+          var PostId = TwPostId.split("_");
+          var commentText = $('#comment').val();
+          $('#timelineTitle').text('Vivek Replied and Accepted the request.');
+          $('#timelineBody').text("Vivek Replied '"+commentText+"' and Accepted the request.");
+          $('#timelineBadge').addClass('success');
+          console.log(commentText);
+          console.log("remove comment");
+          $('#comment').val('');
+          $('#CommentLable').append("<p class='com' style='color:green'>Comment was successfully added!!</p>");
+
+      }
+}
+function removeComment(){
+
+        $('#timelineTitle').text('The ticket is yet to be updated.');
+        $('#timelineBody').text("");
+        $('#timelineBadge').removeClass('success');
+
+        $('#comment').val('');
+        $('#CommentLable').append("<p class='com' style='color:green'>Comment was successfully added!!</p>");
+        $('.com').remove();
+        $('.TwPost').remove();
+        $('#DetailedInfo').text(""); 
+        $('#DetailedInfo1').text(""); 
+        $('#ChatPost').hide();
+        $('#MailPost').hide();
+        $('#CallPost').hide();
+        $('#NormalPost1').show();
+        $('#NormalPost2').show();
+}
+
+        var FADE_TIME = 150; // ms
+        var TYPING_TIMER_LENGTH = 400; // ms
+        var COLORS = [
+          '#e21400', '#91580f', '#f8a700', '#f78b00',
+          '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
+          '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+        ];
+
+        // Initialize variables
+        var $window = $(window);
+        var $usernameInput = $('.usernameInput'); // Input for username
+        var $messages = $('.messages'); // Messages area
+        var $inputMessage = $('.inputMessage'); // Input message input box
+
+        var $loginPage = $('.login.page'); // The login page
+        var $chatPage = $('.chat.page'); // The chatroom page
+
+        // Prompt for setting a username
+        var username;
+        var connected = false;
+        var typing = false;
+        var lastTypingTime;
+        var $currentInput = $usernameInput.focus();
+
+        var socket = io();
+
+        function addParticipantsMessage (data) {
+          var message = '';
+          if (data.numUsers === 1) {
+            message += "there's 1 participant";
+          } else {
+            message += "there are " + data.numUsers + " participants";
+          }
+          log(message);
+        }
+
+        // Sets the client's username
+        function setUsername () {
+          username = 'Vivek';
+
+          // If the username is valid
+          if (username) {
+            $loginPage.fadeOut();
+            $chatPage.show();
+            $loginPage.off('click');
+            $currentInput = $inputMessage.focus();
+
+            // Tell the server your username
+            socket.emit('add user', username);
+          }
+        }
+        
+
+        // Sends a chat message
+        function sendMessage () {
+          var message = $inputMessage.val();
+          // Prevent markup from being injected into the message
+          message = cleanInput(message);
+          // if there is a non-empty message and a socket connection
+          if (message && connected) {
+            $inputMessage.val('');
+            addChatMessage({
+              username: username,
+              message: message
+            });
+            // tell server to execute 'new message' and send along one parameter
+            socket.emit('new message', message);
+          }
+        }
+
+        // Log a message
+        function log (message, options) {
+          var $el = $('<li>').addClass('log').text(message);
+          addMessageElement($el, options);
+        }
+
+        // Adds the visual chat message to the message list
+        function addChatMessage (data, options) {
+          // Don't fade the message in if there is an 'X was typing'
+          var $typingMessages = getTypingMessages(data);
+          options = options || {};
+          if ($typingMessages.length !== 0) {
+            options.fade = false;
+            $typingMessages.remove();
+          }
+
+          var $usernameDiv = $('<span class="username"/>')
+            .text(data.username)
+            .css('color', getUsernameColor(data.username));
+          var $messageBodyDiv = $('<span class="messageBody">')
+            .text(data.message);
+
+          var typingClass = data.typing ? 'typing' : '';
+          var $messageDiv = $('<li class="message"/>')
+            .data('username', data.username)
+            .addClass(typingClass)
+            .append($usernameDiv, $messageBodyDiv);
+
+          addMessageElement($messageDiv, options);
+        }
+
+        // Adds the visual chat typing message
+        function addChatTyping (data) {
+          data.typing = true;
+          data.message = 'is typing';
+          addChatMessage(data);
+        }
+
+        // Removes the visual chat typing message
+        function removeChatTyping (data) {
+          getTypingMessages(data).fadeOut(function () {
+            $(this).remove();
+          });
+        }
+
+        // Adds a message element to the messages and scrolls to the bottom
+        // el - The element to add as a message
+        // options.fade - If the element should fade-in (default = true)
+        // options.prepend - If the element should prepend
+        //   all other messages (default = false)
+        function addMessageElement (el, options) {
+          var $el = $(el);
+
+          // Setup default options
+          if (!options) {
+            options = {};
+          }
+          if (typeof options.fade === 'undefined') {
+            options.fade = true;
+          }
+          if (typeof options.prepend === 'undefined') {
+            options.prepend = false;
+          }
+
+          // Apply options
+          if (options.fade) {
+            $el.hide().fadeIn(FADE_TIME);
+          }
+          if (options.prepend) {
+            $messages.prepend($el);
+          } else {
+            $messages.append($el);
+          }
+          $messages[0].scrollTop = $messages[0].scrollHeight;
+        }
+
+        // Prevents input from having injected markup
+        function cleanInput (input) {
+          return $('<div/>').text(input).html();
+        }
+
+        // Updates the typing event
+        function updateTyping () {
+          if (connected) {
+            if (!typing) {
+              typing = true;
+              socket.emit('typing');
+            }
+            lastTypingTime = (new Date()).getTime();
+
+            setTimeout(function () {
+              var typingTimer = (new Date()).getTime();
+              var timeDiff = typingTimer - lastTypingTime;
+              if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
+                socket.emit('stop typing');
+                typing = false;
+              }
+            }, TYPING_TIMER_LENGTH);
+          }
+        }
+
+        // Gets the 'X is typing' messages of a user
+        function getTypingMessages (data) {
+          return $('.typing.message').filter(function (i) {
+            return $(this).data('username') === data.username;
+          });
+        }
+
+        // Gets the color of a username through our hash function
+        function getUsernameColor (username) {
+          // Compute hash code
+          var hash = 7;
+          for (var i = 0; i < username.length; i++) {
+            hash = username.charCodeAt(i) + (hash << 5) - hash;
+          }
+          // Calculate color
+          var index = Math.abs(hash % COLORS.length);
+          return COLORS[index];
+        }
+
+        // Keyboard events
+
+        $window.keydown(function (event) {
+          // Auto-focus the current input when a key is typed
+          /*if (!(event.ctrlKey || event.metaKey || event.altKey)) {
+            $currentInput.focus();
+          }*/
+          // When the client hits ENTER on their keyboard
+          if (event.which === 13) {
+            if (username) {
+              sendMessage();
+              socket.emit('stop typing');
+              typing = false;
+            } else {
+              setUsername();
+            }
+          }
+        });
+
+        $inputMessage.on('input', function() {
+          updateTyping();
+        });
+
+        // Click events
+
+        // Focus input when clicking anywhere on login page
+        $loginPage.click(function () {
+          $currentInput.focus();
+        });
+
+        // Focus input when clicking on the message input's border
+        $inputMessage.click(function () {
+          $inputMessage.focus();
+        });
+
+        // Socket events
+
+        // Whenever the server emits 'login', log the login message
+        socket.on('login', function (data) {
+          connected = true;
+          // Display the welcome message
+          var message = "Welcome to Socket.IO Chat – ";
+          log(message, {
+            prepend: true
+          });
+          addParticipantsMessage(data);
+        });
+
+        // Whenever the server emits 'new message', update the chat body
+        socket.on('new message', function (data) {
+          addChatMessage(data);
+        });
+
+        // Whenever the server emits 'user joined', log it in the chat body
+        socket.on('user joined', function (data) {
+          log(data.username + ' joined');
+          addParticipantsMessage(data);
+        });
+
+        // Whenever the server emits 'user left', log it in the chat body
+        socket.on('user left', function (data) {
+          log(data.username + ' left');
+          addParticipantsMessage(data);
+          removeChatTyping(data);
+        });
+
+        // Whenever the server emits 'typing', show the typing message
+        socket.on('typing', function (data) {
+          addChatTyping(data);
+        });
+
+        // Whenever the server emits 'stop typing', kill the typing message
+        socket.on('stop typing', function (data) {
+          removeChatTyping(data);
+        });
+
+        socket.on('disconnect', function () {
+          log('you have been disconnected');
+        });
+
+        socket.on('reconnect', function () {
+          log('you have been reconnected');
+          if (username) {
+            socket.emit('add user', username);
+          }
+        });
+
+        socket.on('reconnect_error', function () {
+          log('attempt to reconnect has failed');
+        });
+
+  var textarea = document.querySelector('textarea');
+
+      textarea.addEventListener('keydown', autosize);
+                  
+      function autosize(){
+        var el = this;
+        setTimeout(function(){
+          el.style.cssText = 'height:auto;';
+          // for box-sizing other than "content-box" use:
+          // el.style.cssText = '-moz-box-sizing:content-box';
+          el.style.cssText = 'height:' + el.scrollHeight + 'px';
+        },0);
+      }
+    </script>
+
+</body>
+</html>

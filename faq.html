@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>FAQ</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+  <script src="https://use.fontawesome.com/50a71f6f7c.js"></script>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+      <style>
+                  @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+            body {
+              font-family: 'Roboto', sans-serif;
+              background-color: #f5f5f5;
+              color: #444;
+              
+            }
+
+            main {
+              display: block;
+              position: relative;
+              box-sizing: border-box;
+              padding: 1px;
+              width: 100%;
+              background-color: #fff;
+              margin: 0 auto;
+              margin-top: 0px;
+              box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .live-search-box {
+              width: 100%;
+              display: block;
+              padding: 1em;
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
+              border: 1px solid #3498db;
+              -webkit-border-radius: 5px;
+              -moz-border-radius: 5px;
+              border-radius: 5px;
+            }
+
+            h1 {
+              padding-left: 0px;
+              padding-right: 20px;
+              font-size: 32px;
+              font-weight: 300;
+            }
+
+            .topic {
+              padding: 20px;
+              padding-top: 0px;
+              padding-bottom: 0px;
+              border-bottom: solid 1px #ebebeb;
+            }
+
+            .open {
+              cursor: pointer;
+              display: block;
+              padding: 0px;
+            }
+
+            .open:hover {
+              opacity: 0.7;
+            }
+
+            .expanded {
+              background-color: #f5f5f5;
+              transition: all .3s ease-in-out;
+            }
+
+            .ptag {
+              display: none;
+            }
+
+            .question {
+              padding-top: 30px;
+              padding-right: 40px;
+              padding-bottom: 20px;
+              font-size: 18px;
+              font-weight: 500;
+              color: #526ee4;
+            }
+
+            .answer {
+              font-size: 16px;
+              line-height: 26px;
+              display: none;
+              margin-bottom: 30px;
+              text-align: justify;
+              padding-left: 20px;
+              padding-right: 20px;
+            }
+
+            .faq-t {
+              -moz-transform: rotate(-45deg);
+              -ms-transform: rotate(-45deg);
+              -webkit-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+              display: inline-block;
+              float: right;
+              position: relative;
+              top: -55px;
+              right: 10px;
+              width: 10px;
+              height: 10px;
+              background: transparent;
+              border-left: 2px solid #ccc;
+              border-bottom: 2px solid #ccc;
+              transition: all .3s ease-in-out;
+            }
+
+            .faq-o {
+              top: -50px;
+              -moz-transform: rotate(-224deg);
+              -ms-transform: rotate(-224deg);
+              -webkit-transform: rotate(-224deg);
+              transform: rotate(-224deg);
+            }
+
+            @media only screen and (max-width: 480px) {
+              .faq-t {
+                display: none;
+              }
+              .question {
+                padding-right: 0px;
+              }
+              main {
+                padding: 10px;
+              }
+              .answer {
+                margin-bottom: 30px;
+                padding-left: 0px;
+                padding-right: 0px;
+              }
+            }
+      </style>
+
+
+      <script>
+          
+                
+                jQuery(document).ready(function($) {
+                  $('.question').each(function() {
+                    $(this).attr('data-search-term', $(this).text().toLowerCase() + $(this).find("ptag").text().toLowerCase());
+                
+                  });
+                
+                  $('.live-search-box').on('keyup', function() {
+                
+                    var searchTerm = $(this).val().toLowerCase();
+                
+                    $('.question').each(function() {
+                
+                      if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
+                        $(this).parent().parent().show();
+                      } else {
+                        $(this).parent().parent().hide();
+                      }
+                
+                    });
+                
+                  });
+
+                    $('.open').click(function() {
+                    var container = $(this).parents('.topic');
+                    var answer = container.find('.answer');
+                    var trigger = container.find('.faq-t');
+                  
+                    answer.slideToggle(200);
+                  
+                    if (trigger.hasClass('faq-o')) {
+                      trigger.removeClass('faq-o');
+                    } else {
+                      trigger.addClass('faq-o');
+                    }
+                  
+                    if (container.hasClass('expanded')) {
+                      container.removeClass('expanded');
+                    } else {
+                      container.addClass('expanded');
+                    }
+                  });
+
+                  var copyButton = document.querySelector('.copyb');
+                  copyButton.addEventListener('click', function(e) {
+
+                    console.log($(this.parentElement).text());
+                    var $temp = $("<input>");
+                    $("body").append($temp);
+                    $temp.val($(this.parentElement).text()).select();
+                    document.execCommand("copy");
+                    $temp.remove();
+                  });
+                
+                });
+          </script>
+
+  
+</head>
+
+<body>
+  <main>
+  <h1><i class="fa fa-question-circle" aria-hidden="true" style="padding-right: 5px"></i>Frequently Asked Questions</h1>
+  <input type="text" class="live-search-box" placeholder="Search here..." />
+  <div class="topic">
+
+    <div class="open">
+
+      <h2 class="question">1.I want to Port to your network and I am using Samsung galaxy S4. Please let me know if it is compatible?</h2>
+      <span class="faq-t"></span>
+    </div>
+    <p class="answer">
+      Yes, Your device is compatible with the network. Please send us your phone Number.
+      <i class="copyb fa fa-clone fa-2x" aria-hidden="true" style="float: right;padding-top: 5px; cursor: pointer;"></i>
+    </p>
+      
+    </div>
+  <div class="topic">
+    <div class="open">
+      <h2 class="question">2. I want to use your network in California. How is the network coverage there?
+</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">Yes,The coverage is pretty good there. 
+        <i class="copyb fa fa-clone fa-2x" aria-hidden="true" style="float: right;padding-top: 5px; cursor: pointer;"></i>
+    </p>
+  </div>
+  <div class="topic">
+    <div class="open">
+      <h2 class="question">3. How can I edit a complaint I posted?
+</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="topic">
+    <div class="open">
+      <h2 class="question">4. How can i find out personal information of another user?
+</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="topic">
+    <div class="open">
+      <h2 class="question">5. How can i contact another user?
+</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="topic">
+    <div class="open">
+      <h2 class="question">2. I have posted a complaint/comment, but it doesn’t appear on the website. Why? When my complaint will be posted?
+</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="topic">
+    <div class="open">
+      <h2 class="question">3. How can I edit a complaint I posted?
+</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="topic">
+    <div class="open">
+      <h2 class="question">4. How can i find out personal information of another user?
+</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="topic">
+    <div class="open">
+      <h2 class="question">5. How can i contact another user?
+</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</main>
+
+</body>
+</html>
