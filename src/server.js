@@ -198,9 +198,9 @@ io.sockets.on('connection', function(socket){
                 console.log(data.comment+' '+data.id)
                 client.post('statuses/update', {status: data.comment,in_reply_to_status_id:data.id,auto_populate_reply_metadata:true},  function(error, tweet, response) {
                     if(!error)
-                    //console.log(tweet);   // Raw response object. 
+                    console.log("eyy");   // Raw response object. 
                 
-                    //console.log(error);  
+                    console.log(error);  
                   });
                 
          });
