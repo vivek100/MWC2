@@ -127,7 +127,7 @@ var acceptedChPost= Array();
 var ChAcceptedCount=0;
 
 io.sockets.on('connection', function(socket){
-        console.log('a user connected'+socket.id);
+        console.log('a user connected '+socket.request.connection.remoteAddress);
         socket.on('Get Initial Count',function(){
             //console.log("Count requested");
             io.emit('Sent Initial Count',PostCounter);
