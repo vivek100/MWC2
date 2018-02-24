@@ -54,15 +54,15 @@ var FbAcceptedCount=0;
                             console.log(data.data.length);
                             if(recentPostId === data.data[0].id)
                                 {
-                                    console.log('latest post in database: '+recentPostId+'\n latest post returned by the api'+data.data[0].id);
+                                    //console.log('latest post in database: '+recentPostId+'\n latest post returned by the api'+data.data[0].id);
                                 } else {
-                                    console.log('latest post in database: '+recentPostId+'\n latest post returned by the api'+data.data[0].id);
+                                    //console.log('latest post in database: '+recentPostId+'\n latest post returned by the api'+data.data[0].id);
                                     recentPostId=data.data[0].id;
                                     currentPost=data;
                                     acceptedFbPost[FbAcceptedCount]=data.data[0];
                                     FbAcceptedCount++;
                                     PostCounter[0]++;
-                                    console.log(data.data[0]);
+                                    //console.log(data.data[0]);
                                     io.emit('chat message', data.data[0]);
                                     io.emit('Sent Initial Count',PostCounter);
                                 }
@@ -88,15 +88,15 @@ var TWAcceptedCount=0;
                 setTimeout(function checkTWPost(){
                     client.get('statuses/mentions_timeline', function(error, tweets, response) {
                         if (!error) {
-                          console.log(tweets);
+                          //console.log(tweets);
                         if(recentTWPostId != null){
                             if(tweets.length != 0 ){
-                                console.log(tweets.length);
+                                //console.log(tweets.length);
                                 if(recentTWPostId === tweets[0].id_str)
                                     {
-                                        console.log('latest TW post in database: '+recentTWPostId+'\n latest post returned by the api'+tweets[0].id_str);
+                                        //console.log('latest TW post in database: '+recentTWPostId+'\n latest post returned by the api'+tweets[0].id_str);
                                     } else {
-                                        console.log('latest TW post in database: '+recentTWPostId+'\n latest post returned by the api'+tweets[0].id_str);
+                                        //console.log('latest TW post in database: '+recentTWPostId+'\n latest post returned by the api'+tweets[0].id_str);
                                         recentTWPostId=tweets[0].id_str;
                                         currentTWPost=tweets;
                                         acceptedTWPost[TWAcceptedCount]=tweets[0];
@@ -127,13 +127,13 @@ var acceptedChPost= Array();
 var ChAcceptedCount=0;
 
 io.sockets.on('connection', function(socket){
-        console.log('a user connected');
+        console.log('a user connected'+socket);
         socket.on('Get Initial Count',function(){
-            console.log("Count requested");
+            //console.log("Count requested");
             io.emit('Sent Initial Count',PostCounter);
             });
         socket.on('Get Latest FB Data',function(){
-                console.log("FB Data requested");
+               //console.log("FB Data requested");
                 if(FbAcceptedCount != 0){
                 io.emit('Sent Latest FB Data',acceptedFbPost);
                 }else{
@@ -198,9 +198,9 @@ io.sockets.on('connection', function(socket){
                 console.log(data.comment+' '+data.id)
                 client.post('statuses/update', {status: data.comment,in_reply_to_status_id:data.id,auto_populate_reply_metadata:true},  function(error, tweet, response) {
                     if(!error)
-                    console.log(tweet);   // Raw response object. 
+                    //console.log(tweet);   // Raw response object. 
                 
-                    console.log(error);  
+                    //console.log(error);  
                   });
                 
          });
